@@ -1,5 +1,8 @@
+import datetime
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.urls import reverse
 
 
 class Subdivision(models.Model):
@@ -26,7 +29,7 @@ class Employee(models.Model):
         ('Purchase department', 'Отдел снабжения'),
         ('Management', 'Руководство'),
         ('Production and technical department', 'Производственно-технический отдел'),
-        ('Foreman', 'Производители работ'),
+        ('Foremen', 'Производители работ'),
     )
 
     f_name = models.CharField(max_length=64)
@@ -39,6 +42,20 @@ class Employee(models.Model):
 
     def __str__(self):
         return f'{self.l_name} {self.f_name}'
+
+    def work_experience(self):
+        today = datetime.date.today()
+        exp = today - self.employment_date
+
+        if exp.days < 31:
+            return f'{exp.days} дней'
+        elif 31 <= exp.days < 365:
+            return f'{exp.days // 31} месяцев и {exp.days % 31} дней'
+        elif exp.days > 365:
+            return f'{exp.days // 365} лет {(exp.days % 365) // 31} месяцев'
+
+    def get_absolute_url(self):
+        return reverse('employee:employee_detail', args=[self.pk])
 
 
 class AdvUser(AbstractUser):

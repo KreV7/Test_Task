@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}
+    Удалить сотрудника
+{% endblock %}
+
+{% block main %}
+    <p>Действительно удалить сотрудника?:</p>
+    <h5>{{ object.l_name }} {{ object.f_name }}</h5>
+    <p>{{ object.subdivision }}</p>
+    <p>{{ object.get_department_display }}</p>
+    <p>{{ object.position }}</p>
+    <p>Работающего с {{ object.employment_date|date:"d-m-Y" }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <input class="btn btn-dark btn-sm" type="submit" value="Удалить">
+    </form>
+{% endblock %}
