@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}
+    Вход
+{% endblock %}
+
+{% block main %}
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+        <input type="hidden" name="next" value="{{ next }}">
+        {% buttons submit="Войти" %}{% endbuttons %}
+    </form>
+{% endblock %}

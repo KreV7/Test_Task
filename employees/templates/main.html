@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Main page
+{% endblock %}
+
+{% block main %}
+    <div>
+        <h4>Список подразделений:</h4>
+        <ul>
+            {% for subdiv in subdivisions %}
+                <li>
+                    {{ subdiv }} (<b>{{ subdiv.employee_set.all.count }}</b> сотрудников)
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

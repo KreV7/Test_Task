@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Подразделения
+{% endblock %}
+
+{% block main %}
+    <div>
+        <a href="{% url 'employee:subdivisions_create' %}" class="btn btn-dark btn-sm">Добавить подразделение</a>
+        <h4>Список подразделений:</h4>
+        <ul>
+            {% for subdiv in subdivisions %}
+                <li>
+                    {{ subdiv.title }} - {{ subdiv.address }} (<b>{{ subdiv.employee_set.all.count }}</b>
+                    сотрудников)<br>
+                    <a class="badge badge-dark" href="{% url 'employee:subdivisions_update' subdiv.pk %}">Изменить</a>
+                    <a class="badge badge-dark" href="{% url 'employee:subdivisions_delete' subdiv.pk %}">Удалить</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

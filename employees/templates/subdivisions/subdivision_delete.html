@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}
+    Удалить подразделение
+{% endblock %}
+
+{% block main %}
+    <p>Действительно удалить подразделение:</p>
+    <h5>{{ object.title }}</h5>
+    <p>Адрес: {{ object.address }}</p>
+    <p>Примечание: {{ object.note }}</p>
+    <br>
+    {% if object.employee_set.all %}
+        <p>В этом подразделении числятся {{ object.employee_set.all.count }} сотрудников</p>
+        <p>При удалении подразделения удалятся и сотрудники!</p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <input class="btn btn-dark btn-sm" type="submit" value="Удалить">
+    </form>
+{% endblock %}
