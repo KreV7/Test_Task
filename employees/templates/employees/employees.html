@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Сотрудники
+{% endblock %}
+
+{% block main %}
+    <div>
+        <a href="{% url 'employee:employee_create' %}" class="btn btn-dark btn-sm">Добавить сотрудника</a>
+        <h4>Список сотрудников:</h4>
+        <div style="margin: 0 10%">
+            <table class="table table-hover">
+                <thead>
+                <tr class="border border-dark">
+                    <th class="border-top border-bottom border-dark text-center" style="width: 5%">№</th>
+                    <th class="border-top border-bottom border-dark text-center" style="width: 10%">Фамилия</th>
+                    <th class="border-top border-bottom border-dark text-center" style="width: 10%">Имя</th>
+                    <th class="border-top border-bottom border-dark text-center" style="width: 15%">Подразделение</th>
+                    <th class="border-top border-bottom border-dark text-center" style="width: 15%">Отдел</th>
+                    <th class="border-top border-bottom border-dark text-center" style="width: 15%">Должность</th>
+                    <th class="border-top border-bottom border-dark text-center" style="width: 15%">Дата
+                        трудоустройства
+                    </th>
+                    <th class="border-top border-bottom border-dark text-center" style="width: 15%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for employee in page_obj %}
+                    <tr class="border border-dark">
+                        <td class="p-1 border-top border-dark">{{ forloop.counter }}</td>
+                        <td class="p-1 border-top border-dark">
+                            <a href="{{ employee.get_absolute_url }}">{{ employee.l_name }}</a></td>
+                        <td class="p-1 border-top border-dark">{{ employee.f_name }}</td>
+                        <td class="p-1 border-top border-dark">{{ employee.subdivision }}</td>
+                        <td class="p-1 border-top border-dark">{{ employee.get_department_display }}</td>
+                        <td class="p-1 border-top border-dark">{{ employee.position }}</td>
+                        <td class="p-1 border-top border-dark">{{ employee.employment_date }}</td>
+                        <td class="p-1 border-top border-dark">
+                            <a class="badge badge-dark"
+                               href="{% url 'employee:employee_update' employee.pk %}">Изменить</a>
+                            <a class="badge badge-dark"
+                               href="{% url 'employee:employee_delete' employee.pk %}">Удалить</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% if page_obj.paginator.num_pages > 1 %}
+        <ul class="pagination pagination-sm justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link text-dark" href="?page={{ page_obj.previous_page_number }}">
+                    &laquo;</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><a class="page-link text-dark" href="#">&laquo;</a>
+                </li>
+            {% endif %}
+            <li class="page-item disabled">
+                <p class="page-link text-dark">
+                    Стр. {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+                </p>
+            </li>
+            {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link text-dark"
+                                         href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><a class="page-link text-dark" href="#">&raquo;</a>
+                </li>
+            {% endif %}
+        </ul>
+    {% endif %}
+
+
+{% endblock %}

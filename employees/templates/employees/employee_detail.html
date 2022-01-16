@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}
+    Детализация по сотруднику
+{% endblock %}
+
+{% block main %}
+    <h2>Информация по сотруднику</h2>
+    <h3><b>Фамилия и имя:</b> {{ object.l_name }} {{ object.f_name }}</h3>
+    <h5><b>Подразделение:</b> {{ object.subdivision }}</h5>
+    <h5><b>Отдел:</b> {{ object.get_department_display }}</h5>
+    <h5><b>Должность:</b> {{ object.position }}</h5>
+    <h5>Работает с {{ object.employment_date|date:"d-m-Y" }}</h5>
+    <h5>Стаж работы {{ object.work_experience }}</h5>
+{% endblock %}

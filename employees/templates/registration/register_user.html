@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}
+    Регистрация пользователя
+{% endblock %}
+
+{% block main %}
+    <h2 class="text_center">Регистрация нового пользователя</h2>
+    <form style="margin: 0 20%" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+        {% buttons submit="Зарегистрировать" %}{% endbuttons %}
+    </form>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Пользователи
+{% endblock %}
+
+{% block main %}
+    <div>
+        <a href="{% url 'employee:user_create' %}" class="btn btn-dark btn-sm">Добавить пользователя</a>
+        <h4>Список пользователей:</h4>
+        <div style="margin: 0 10%">
+            <table class="table table-hover">
+                <thead>
+                <tr class="border border-dark">
+                    <th class="border-top border-bottom border-dark text-center" style="width: 5%">№</th>
+                    <th class="border-top border-bottom border-dark text-center" style="width: 20%">Имя пользователя и
+                        Email
+                    </th>
+                    <th class="border-top border-bottom border-dark text-center" style="width: 15%">Фамилия</th>
+                    <th class="border-top border-bottom border-dark text-center" style="width: 15%">Имя</th>
+                    <th class="border-top border-bottom border-dark text-center" style="width: 15%">Отдел</th>
+                    <th class="border-top border-bottom border-dark text-center" style="width: 15%">Должность</th>
+                    <th class="border-top border-bottom border-dark text-center" style="width: 15%">Дата
+                        трудоустройства (Стаж работы)
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr class="border border-dark">
+                        <td class="p-1 border-top border-dark">{{ forloop.counter }}</td>
+                        <td class="p-1 border-top border-dark">{{ user.username }} ({{ user.email }})</td>
+                        <td class="p-1 border-top border-dark">{{ user.employee.l_name }}</td>
+                        <td class="p-1 border-top border-dark">{{ user.employee.f_name }}</td>
+                        <td class="p-1 border-top border-dark">{{ user.employee.get_department_display }}</td>
+                        <td class="p-1 border-top border-dark">{{ user.employee.position }}</td>
+                        <td class="p-1 border-top border-dark">{{ user.employee.employment_date }}<br>
+                        {{ user.employee.work_experience }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

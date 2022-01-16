@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Список должностей
+{% endblock %}
+
+{% block main %}
+    <div>
+        <a href="{% url 'employee:positions_create' %}" class="btn btn-dark btn-sm">Добавить новую должность</a>
+        <h4>Список должностей:</h4>
+        <ul>
+            {% for pos in positions %}
+                <li>
+                    {{ pos.title }} ({{ pos.employee_set.all.count}})<br>
+                    <a class="badge badge-dark" href="{% url 'employee:positions_update' pos.pk %}">Изменить</a>
+                    <a class="badge badge-dark" href="{% url 'employee:positions_delete' pos.pk %}">Удалить</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

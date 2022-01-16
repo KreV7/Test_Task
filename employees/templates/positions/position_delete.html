@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}
+    Удалить должность
+{% endblock %}
+
+{% block main %}
+    <p>Действительно удалить должность:</p>
+    <h5>{{ object.title }}</h5>
+    {% if object.employee_set.all %}
+        <p>К этой должности привязаны {{ object.employee_set.all.count }} сотрудников</p>
+        <p>При удалении должности удалятся и сотрудники!</p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <input class="btn btn-dark btn-sm" type="submit" value="Удалить">
+    </form>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}
+    Добавить подразделение
+{% endblock %}
+
+{% block main %}
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+        {% buttons submit="Добавить" %}{% endbuttons %}
+    </form>
+{% endblock %}

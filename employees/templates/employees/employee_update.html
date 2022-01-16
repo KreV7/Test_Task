@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}
+    Изменить инфо о сотруднике
+{% endblock %}
+
+{% block main %}
+    <form style="margin: 0 20%" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+        {% buttons submit="Изменить" %}{% endbuttons %}
+    </form>
+{% endblock %}
