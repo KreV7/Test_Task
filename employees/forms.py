@@ -77,6 +77,5 @@ class RegisterUserForm(forms.ModelForm):
             'employee': 'Сотрудник',
             'username': 'Логин',
             'email': 'Электронная почта',
-            'password1': 'Пароль',
-            'password2': 'Пароль (повторно)',
+            'password': 'Пароль'
         }
